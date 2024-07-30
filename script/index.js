@@ -31,6 +31,21 @@ if (screen.orientation && screen.orientation.lock) {
   console.log("Screen Orientation API is not supported on this device.");
 }
 
+const elem = document.documentElement; // or document.body
+
+if (elem.requestFullscreen) {
+  elem.requestFullscreen();
+} else if (elem.mozRequestFullScreen) {
+  // Firefox
+  elem.mozRequestFullScreen();
+} else if (elem.webkitRequestFullscreen) {
+  // Chrome, Safari, and Opera
+  elem.webkitRequestFullscreen();
+} else if (elem.msRequestFullscreen) {
+  // IE/Edge
+  elem.msRequestFullscreen();
+}
+
 const gameoverScreen = document.querySelector(".gameover-screen");
 const againButton = document.querySelector(".again-button");
 const totalScore = document.querySelector(".total-score");
