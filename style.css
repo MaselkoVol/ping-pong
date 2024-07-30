@@ -76,10 +76,10 @@ body {
 
 .button {
 	font-weight: 700;
+	font-style: italic;
   font-size: 4vw;
   padding: .5em 1em;
-  border-radius: 50% 40% 50% 40%;
-	transform: rotate(5deg);
+  border-radius: 50% 1.2em 50% 1.2em;
   color: white;
   background-color: rgb(219, 113, 255);
   border: 0.1em solid rgb(211, 130, 238);

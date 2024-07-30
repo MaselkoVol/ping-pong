@@ -8,8 +8,8 @@ class MovingPlatform {
     this._isMovingRight = false;
     this._isMovingLeft = false;
     this._accelerationX = 0;
-    this._maxAccelerationX = 10;
-    this._accelerationXSpeed = 0.3;
+    this._maxAccelerationX = 5;
+    this._accelerationXSpeed = 0.1;
 		this._prevX = this._x;
 		this._prevy = this._y;
 
@@ -107,7 +107,8 @@ class MovingPlatform {
     this.borderCollision(canvas);
   }
 	clearRect(ctx) {
-		ctx.clearRect(this._prevX - 5, this._prevY - 5, this._width + 10, this._height + 10);
+		ctx.fillStyle = "white";
+		ctx.fillRect(this._prevX - 5, this._prevY - 5, this._width + 10, this._height + 10);
 	}
   draw(ctx) {
 		ctx.fillStyle = this._color;

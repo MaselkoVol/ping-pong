@@ -4,8 +4,8 @@ class Ball {
     this._y = y;
     this._radius = radius;
     this._color = color;
-    this._speed = 6;
-    this._maxSpeed = 15;
+    this._speed = 3;
+    this._maxSpeed = 8;
     this._direction = [
       -Math.random() * (Math.PI / 6) - Math.PI / 6,
       -Math.random() * (Math.PI / 6) - (Math.PI / 3) * 2,
@@ -50,7 +50,7 @@ class Ball {
         this._speed = this._maxSpeed;
       }
       score.innerHTML = "score: " + (+score.textContent.slice(7) + 1);
-      level.innerHTML = "level: " + String(Math.floor(this._speed) - 5);
+      level.innerHTML = "level: " + String(Math.floor(this._speed) - 2);
     }
 		if (this._y - this._radius > canvas.height) {
 			gameoverScreen.classList.add("active");
@@ -59,7 +59,8 @@ class Ball {
   }
 
 	clearRect(ctx) {
-		ctx.clearRect(this._prevX - this._radius - 5, this._prevY - this._radius - 5, this._radius * 2 + 10, this._radius * 2 + 10);
+		ctx.fillStyle = "white";
+		ctx.fillRect(this._prevX - this._radius - 5, this._prevY - this._radius - 5, this._radius * 2 + 10, this._radius * 2 + 10);
 	}
 
   draw(ctx) {
