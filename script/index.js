@@ -17,41 +17,58 @@ if (!isTouch) {
   rightArrow.remove();
 }
 
-if (screen.orientation && screen.orientation.lock) {
-  // Lock the screen to landscape-primary
-  screen.orientation
-    .lock("landscape-primary")
-    .then(function () {
-      console.log("Screen orientation locked to landscape-primary");
-    })
-    .catch(function (error) {
-      console.error("Screen orientation lock failed:", error);
-    });
-} else {
-  console.log("Screen Orientation API is not supported on this device.");
-}
-
-const elem = document.documentElement; // or document.body
-
-if (elem.requestFullscreen) {
-  elem.requestFullscreen();
-} else if (elem.mozRequestFullScreen) {
-  // Firefox
-  elem.mozRequestFullScreen();
-} else if (elem.webkitRequestFullscreen) {
-  // Chrome, Safari, and Opera
-  elem.webkitRequestFullscreen();
-} else if (elem.msRequestFullscreen) {
-  // IE/Edge
-  elem.msRequestFullscreen();
-}
-
 const gameoverScreen = document.querySelector(".gameover-screen");
 const againButton = document.querySelector(".again-button");
 const totalScore = document.querySelector(".total-score");
 
 const startButtton = document.querySelector(".start-button");
 const startScreen = document.querySelector(".start-screen");
+
+if (isTouch) {
+  startButtton.addEventListener("click", function () {
+    const elem = document.documentElement; // or document.body
+
+    function enterFullscreen() {
+      return new Promise((resolve, reject) => {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen().then(resolve).catch(reject);
+        } else if (elem.mozRequestFullScreen) {
+          // Firefox
+          elem.mozRequestFullScreen().then(resolve).catch(reject);
+        } else if (elem.webkitRequestFullscreen) {
+          // Chrome, Safari, and Opera
+          elem.webkitRequestFullscreen().then(resolve).catch(reject);
+        } else if (elem.msRequestFullscreen) {
+          // IE/Edge
+          elem.msRequestFullscreen().then(resolve).catch(reject);
+        } else {
+          reject(new Error("Fullscreen API is not supported on this device."));
+        }
+      });
+    }
+
+    function lockOrientation() {
+      if (screen.orientation && screen.orientation.lock) {
+        screen.orientation
+          .lock("landscape-primary")
+          .then(function () {
+            console.log("Screen orientation locked to landscape-primary");
+          })
+          .catch(function (error) {
+            console.error("Screen orientation lock failed:", error);
+          });
+      } else {
+        console.log("Screen Orientation API is not supported on this device.");
+      }
+    }
+
+    enterFullscreen()
+      .then(lockOrientation)
+      .catch(function (error) {
+        console.error("Failed to enter fullscreen mode:", error);
+      });
+  });
+}
 
 const score = document.querySelector(".score");
 const level = document.querySelector(".level");
