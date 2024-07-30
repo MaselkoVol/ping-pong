@@ -5,7 +5,7 @@ import { isTouchDevice } from "./isTouch.js";
 
 const RESOLUTION = 1920;
 const ASPECT_RATIO = 16 / 9;
-const MAX_FPS = 60;
+const MAX_FPS = 120;
 
 document.documentElement.style.setProperty("--aspect-ratio", ASPECT_RATIO);
 
@@ -84,15 +84,11 @@ if (canvasContainer) {
   resizeOberver.observe(document.body);
 }
 
-let loginInterval;
-let renderInterval;
+let interval;
 
 function startNewGame() {
-  if (loginInterval) {
-    clearInterval(loginInterval);
-  }
-  if (renderInterval) {
-    clearInterval(renderInterval);
+  if (interval) {
+    clearInterval(interval);
   }
 
   score.innerHTML = "score: 0";
@@ -120,7 +116,9 @@ function startNewGame() {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   // game interval to process everything
-  loginInterval = setInterval(() => {
+  interval = setInterval(() => {
+		movingPlatform.clearRect(ctx);
+    ball.clearRect(ctx);
     movingPlatform.move(canvas, leftArrow, rightArrow);
     ball.move(
       canvas,
@@ -130,15 +128,10 @@ function startNewGame() {
       gameoverScreen,
       totalScore
     );
-  }, 1000 / 120);
-
-  // game interval to render everything
-  renderInterval = setInterval(() => {
-    movingPlatform.clearRect(ctx);
-    ball.clearRect(ctx);
     movingPlatform.draw(ctx);
     ball.draw(ctx);
   }, 1000 / MAX_FPS);
+
 }
 
 startButtton.addEventListener("click", () => {
