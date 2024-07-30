@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: cursive;
+}
+:root {
+  --aspect-ratio: 16 / 9;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	background: rgb(255,255,255);
+}
+
+.canvas-container {
+  position: relative;
+  display: block;
+  aspect-ratio: var(--aspect-ratio);
+	box-shadow: 0 0 100px lightgrey;
+}
+
+.canvas-container.horizontal {
+  width: 100%;
+}
+.canvas-container.vertical {
+  height: 100%;
+}
+
+.canvas {
+  display: block;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.score,
+.level {
+  font-size: 3vw;
+  position: absolute;
+  top: 0.2em;
+  color: rgb(56, 56, 56);
+  font-weight: 600;
+}
+
+.score {
+  left: 1em;
+}
+
+.level {
+  right: 1em;
+}
+
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+	transition: top .5s ease;
+	box-shadow: 0 0 50px rgb(255, 255, 255);
+}
+.start-screen.active {
+	top: -100%;
+}
+
+.button {
+	font-weight: 700;
+  font-size: 4vw;
+  padding: .5em 1em;
+  border-radius: 50% 40% 50% 40%;
+	transform: rotate(5deg);
+  color: white;
+  background-color: rgb(219, 113, 255);
+  border: 0.1em solid rgb(211, 130, 238);
+	transition: background-color .3s ease, trasform .3s ease, transform .3s ease;
+	cursor: pointer;
+	box-shadow: 0 0 .1em rgb(219, 113, 255);
+	user-select: none;
+}
+@media (any-hover: hover) {
+  .button:hover {
+    background-color: rgb(248, 237, 254);
+    color: rgb(219, 113, 255);
+		transform: rotate(-5deg);
+  }
+}
+
+
+.gameover-screen {
+	display: flex;
+	flex-direction: column;
+	top: -100%;
+}
+.gameover-screen.active {
+	top: 0;
+}
+
+.title {
+	font-size: 4vw;
+}
+.sub-title {
+	font-size: 3vw;
+	text-align: left;
+	margin-bottom: 1em;
+}
+
+.total-score {
+	color: gold;
+}
+
+.again-button {
+	font-size: 3vw;
+}
+
+.arrow {
+	font-size: 10vw;
+	position: absolute;
+	width: 1em;
+	opacity: .4;
+	bottom: .2em;
+	user-select: none;
+}
+
+.left-arrow {
+	left: .2em;
+}
+
+.right-arrow {
+	right: .2em;
+	transform: rotate(180deg);
+}

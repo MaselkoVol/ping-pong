@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+		<div class="start-screen splash-screen">
+			<button class="start-button button">Start game</butto>
+		</div>
+		<div class="gameover-screen splash-screen">
+			<h1 class="title">Game over</h1>
+			<h2 class="sub-title">Your score: <span class="total-score">4321324</span></h2>
+			<button class="again-button button">Play Again</butto>
+		</div>
+    <div class="canvas-container">
+      <canvas class="canvas vertical"> </canvas>
+      <h1 class="score">score: 0</h1>
+      <h1 class="level">level: 1</h1>
+			<img draggable="false" class="arrow left-arrow" src="./left-arrow.svg"/>
+			<img draggable="false" class="arrow right-arrow" src="./left-arrow.svg"/>
+    </div>
+    <script type="module" src="./script/index.js"></script>
+  </body>
+</html>
