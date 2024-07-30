@@ -13,8 +13,22 @@ const isTouch = isTouchDevice();
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 if (!isTouch) {
-  leftArrow.remove()
+  leftArrow.remove();
   rightArrow.remove();
+}
+
+if (screen.orientation && screen.orientation.lock) {
+  // Lock the screen to landscape-primary
+  screen.orientation
+    .lock("landscape-primary")
+    .then(function () {
+      console.log("Screen orientation locked to landscape-primary");
+    })
+    .catch(function (error) {
+      console.error("Screen orientation lock failed:", error);
+    });
+} else {
+  console.log("Screen Orientation API is not supported on this device.");
 }
 
 const gameoverScreen = document.querySelector(".gameover-screen");
@@ -67,9 +81,9 @@ function startNewGame() {
     PLATFORM_WIDTH,
     PLATFORM_HEIGHT,
     "rgb(208,137,255)",
-		isTouch,
-		leftArrow,
-		rightArrow,
+    isTouch,
+    leftArrow,
+    rightArrow
   );
 
   // game interval to process everything
