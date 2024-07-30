@@ -5,7 +5,7 @@ import { isTouchDevice } from "./isTouch.js";
 
 const RESOLUTION = 1920;
 const ASPECT_RATIO = 16 / 9;
-const MAX_FPS = 240;
+const MAX_FPS = 60;
 
 document.documentElement.style.setProperty("--aspect-ratio", ASPECT_RATIO);
 
