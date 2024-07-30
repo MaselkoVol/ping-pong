@@ -14,22 +14,24 @@ class MovingPlatform {
     document.addEventListener("keydown", this.keyDown.bind(this));
     document.addEventListener("keyup", this.keyUp.bind(this));
     if (isTouch) {
-      leftArrow.addEventListener(
-        "touchstart",
-        () => (this._isMovingLeft = true)
-      );
-      leftArrow.addEventListener(
-        "touchend",
-        () => (this._isMovingLeft = false)
-      );
-      rightArrow.addEventListener(
-        "touchstart",
-        () => (this._isMovingRight = true)
-      );
-      rightArrow.addEventListener(
-        "touchend",
-        () => (this._isMovingRight = false)
-      );
+      leftArrow.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        this._isMovingLeft = true;
+        leftArrow.classList.add("active");
+      });
+      leftArrow.addEventListener("touchend", () => {
+        this._isMovingLeft = false;
+        leftArrow.classList.remove("active");
+      });
+      rightArrow.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        this._isMovingRight = true;
+        rightArrow.classList.add("active");
+      });
+      rightArrow.addEventListener("touchend", () => {
+        this._isMovingRight = false;
+        rightArrow.classList.remove("active");
+      });
     }
   }
 

@@ -129,6 +129,7 @@ body {
 	opacity: .4;
 	bottom: .2em;
 	user-select: none;
+	transition: transform .1s ease;
 }
 
 .left-arrow {
@@ -138,4 +139,12 @@ body {
 .right-arrow {
 	right: .2em;
 	transform: rotate(180deg);
+}
+
+.left-arrow.active {
+	transform: scale(.9);
+}
+
+.right-arrow.active {
+	transform: rotate(180deg) scale(.9);
 }
