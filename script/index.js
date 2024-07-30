@@ -130,7 +130,7 @@ function startNewGame() {
       gameoverScreen,
       totalScore
     );
-  }, 1000 / 240);
+  }, 1000 / 120);
 
   // game interval to render everything
   renderInterval = setInterval(() => {

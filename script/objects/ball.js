@@ -4,8 +4,8 @@ class Ball {
     this._y = y;
     this._radius = radius;
     this._color = color;
-    this._speed = 3;
-    this._maxSpeed = 8;
+    this._speed = 6;
+    this._maxSpeed = 15;
     this._direction = [
       -Math.random() * (Math.PI / 6) - Math.PI / 6,
       -Math.random() * (Math.PI / 6) - (Math.PI / 3) * 2,
@@ -45,7 +45,7 @@ class Ball {
       this._y = platform.y - this._radius;
       this._direction =
         Math.PI * 2 - this._direction + Math.random() * 0.2 - 0.1;
-      this._speed += 0.1;
+      this._speed += 0.2;
       if (this._speed > this._maxSpeed) {
         this._speed = this._maxSpeed;
       }
