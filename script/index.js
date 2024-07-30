@@ -28,39 +28,52 @@ if (isTouch) {
   startButtton.addEventListener("click", function () {
     const elem = document.documentElement; // or document.body
 
-    function enterFullscreen() {
-      return new Promise((resolve, reject) => {
-        if (elem.requestFullscreen) {
-          elem.requestFullscreen().then(resolve).catch(reject);
-        } else if (elem.mozRequestFullScreen) {
-          // Firefox
-          elem.mozRequestFullScreen().then(resolve).catch(reject);
-        } else if (elem.webkitRequestFullscreen) {
-          // Chrome, Safari, and Opera
-          elem.webkitRequestFullscreen().then(resolve).catch(reject);
-        } else if (elem.msRequestFullscreen) {
-          // IE/Edge
-          elem.msRequestFullscreen().then(resolve).catch(reject);
-        } else {
-          reject(new Error("Fullscreen API is not supported on this device."));
-        }
-      });
-    }
+		function enterFullscreen(elem) {
+			return new Promise((resolve, reject) => {
+				if (elem.requestFullscreen) {
+					elem.requestFullscreen().then(resolve).catch(reject);
+				} else if (elem.mozRequestFullScreen) {
+					// Firefox
+					elem.mozRequestFullScreen().then(resolve).catch(reject);
+				} else if (elem.webkitRequestFullscreen) {
+					// Chrome, Safari, and Opera
+					elem.webkitRequestFullscreen();
+					resolve();
+				} else if (elem.msRequestFullscreen) {
+					// IE/Edge
+					elem.msRequestFullscreen().then(resolve).catch(reject);
+				} else {
+					reject(new Error("Fullscreen API is not supported on this device."));
+				}
+			});
+		}
 
-    function lockOrientation() {
-      if (screen.orientation && screen.orientation.lock) {
-        screen.orientation
-          .lock("landscape-primary")
-          .then(function () {
-            console.log("Screen orientation locked to landscape-primary");
-          })
-          .catch(function (error) {
-            console.error("Screen orientation lock failed:", error);
-          });
-      } else {
-        console.log("Screen Orientation API is not supported on this device.");
-      }
-    }
+		function lockOrientation() {
+			if (screen.orientation && screen.orientation.lock) {
+				screen.orientation.lock("landscape-primary")
+					.then(function () {
+						console.log("Screen orientation locked to landscape-primary");
+					})
+					.catch(function (error) {
+						console.error("Screen orientation lock failed:", error);
+					});
+			} else {
+				// Fallback for Safari and other browsers that don't support screen.orientation.lock
+				if (typeof screen.lockOrientation === 'function' ||
+						typeof screen.mozLockOrientation === 'function' ||
+						typeof screen.msLockOrientation === 'function') {
+					var lock = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
+					var success = lock.call(screen, 'landscape-primary');
+					if (success) {
+						console.log("Screen orientation locked to landscape-primary");
+					} else {
+						console.error("Screen orientation lock failed");
+					}
+				} else {
+					console.log("Screen Orientation API is not supported on this device.");
+				}
+			}
+		}
 
     enterFullscreen()
       .then(lockOrientation)
