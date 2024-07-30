@@ -70,7 +70,7 @@ body {
 	box-shadow: 0 0 50px rgb(255, 255, 255);
 }
 .start-screen.active {
-	top: -100%;
+	top: -120%;
 }
 
 .button {
@@ -99,7 +99,7 @@ body {
 .gameover-screen {
 	display: flex;
 	flex-direction: column;
-	top: -100%;
+	top: -120%;
 }
 .gameover-screen.active {
 	top: 0;
