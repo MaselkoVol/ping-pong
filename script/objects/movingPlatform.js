@@ -10,6 +10,8 @@ class MovingPlatform {
     this._accelerationX = 0;
     this._maxAccelerationX = 10;
     this._accelerationXSpeed = 0.3;
+		this._prevX = this._x;
+		this._prevy = this._y;
 
     document.addEventListener("keydown", this.keyDown.bind(this));
     document.addEventListener("keyup", this.keyUp.bind(this));
@@ -104,10 +106,14 @@ class MovingPlatform {
 
     this.borderCollision(canvas);
   }
-
+	clearRect(ctx) {
+		ctx.clearRect(this._prevX - 5, this._prevY - 5, this._width + 10, this._height + 10);
+	}
   draw(ctx) {
-    ctx.fillStyle = this._color;
+		ctx.fillStyle = this._color;
     ctx.fillRect(this._x, this._y, this._width, this._height);
+		this._prevX = this._x;
+		this._prevY = this._y;
   }
 }
 

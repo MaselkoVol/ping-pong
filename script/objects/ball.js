@@ -58,12 +58,18 @@ class Ball {
 		}
   }
 
+	clearRect(ctx) {
+		ctx.clearRect(this._prevX - this._radius - 5, this._prevY - this._radius - 5, this._radius * 2 + 10, this._radius * 2 + 10);
+	}
+
   draw(ctx) {
     ctx.beginPath();
     ctx.strokeStyle = this._color;
 		ctx.lineWidth = 5;
     ctx.arc(this._x, this._y, this._radius, 0, 2 * Math.PI, false);
     ctx.stroke();
+		this._prevX = this._x;
+		this._prevY = this._y;
   }
 }
 

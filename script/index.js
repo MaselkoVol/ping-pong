@@ -118,6 +118,7 @@ function startNewGame() {
     rightArrow
   );
 
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   // game interval to process everything
   loginInterval = setInterval(() => {
     movingPlatform.move(canvas, leftArrow, rightArrow);
@@ -133,7 +134,8 @@ function startNewGame() {
 
   // game interval to render everything
   renderInterval = setInterval(() => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    movingPlatform.clearRect(ctx);
+    ball.clearRect(ctx);
     movingPlatform.draw(ctx);
     ball.draw(ctx);
   }, 1000 / MAX_FPS);
@@ -141,7 +143,13 @@ function startNewGame() {
 
 startButtton.addEventListener("click", () => {
   startScreen.classList.add("active");
-  startNewGame();
+  if (isTouch) {
+    setTimeout(() => {
+      startNewGame();
+    }, 500);
+  } else {
+    startNewGame();
+  }
 });
 
 againButton.addEventListener("click", () => {
