@@ -50,7 +50,7 @@ class Ball {
         this._speed = this._maxSpeed;
       }
       score.innerHTML = "score: " + (+score.textContent.slice(7) + 1);
-      level.innerHTML = "level: " + String(Math.floor(this._speed) - 2);
+      level.innerHTML = "level: " + String(Math.floor(this._speed) - 5);
     }
 		if (this._y - this._radius > canvas.height) {
 			gameoverScreen.classList.add("active");
